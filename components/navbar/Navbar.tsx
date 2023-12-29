@@ -1,17 +1,28 @@
-export const Navbar = () => {
+import { HomeIcon } from "@primer/octicons-react";
+import Link from "next/link";
+
+const navItems = [
+    {path:'/about',text:'About'},
+    {path:'/pricing',text:'Pricing'},
+    {path:'/contact',text:'Contact'},
+]
+
+export const Navbar = async() => {
 	return (
 		<nav className="flex bg-blue-800 bg-opacity-30 p-2 m-2 rounded">
-			<span>Home</span>
+			<Link className="flex items-center" href={'/'} >
+                <HomeIcon className="mr-2"/>
+				Home
+			</Link>
 			<div className="flex flex-1"></div>
-			<a className="mr-2" href="/about">
-				About
-			</a>
-			<a className="mr-2" href="/pricing">
-				Pricing
-			</a>
-			<a className="mr-2" href="/contact">
-				Contact
-			</a>
+
+            {
+                navItems.map( navItem => (
+                    <Link key={navItem.text} className="mr-2" href={navItem.path}>
+                        {navItem.text}
+                    </Link>
+                ))
+            }
 		</nav>
 	);
 };
